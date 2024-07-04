@@ -1,0 +1,110 @@
+/* styles.css */
+
+/* Basic styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #0066cc; /* Bright blue background */
+    color: white;
+    text-align: center;
+    padding: 40px 0; /* Added padding for more spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.header-description {
+    margin: 10px 0 30px; /* Space below the header */
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: 300;
+}
+
+/* Navigation styling within header */
+header nav {
+    position: absolute;
+    top: 150px; /* Positioning the ADMIN link lower */
+    right: 150px;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px; /* Padding for clickable area */
+    background-color: #004999; /* Slightly darker blue */
+    border-radius: 5px; /* Rounded corners for buttons */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #003366; /* Even darker on hover */
+    transform: translateY(-3px);
+}
+
+main {
+    padding: 20px;
+    flex: 1; /* Grow to fill available space */
+    background-color: #fff; /* White background for content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border-radius: 8px; /* Rounded corners for a smooth look */
+    margin: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #004999; /* Consistent with navigation hover color */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: absolute;
+    bottom: 0; /* Stick to the bottom */
+    left: 0;
+    right: 0;
+    margin-top: auto; /* Ensure footer stays at bottom if content is short */
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .header-description {
+        font-size: 1em;
+    }
+
+    header nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    main {
+        margin: 10px;
+    }
+}
