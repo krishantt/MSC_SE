@@ -6,6 +6,9 @@ from django.views.generic import TemplateView
 
 from college import views
 
+
+
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
@@ -15,7 +18,7 @@ urlpatterns = [
     url(r'^.*cloneyear.*$', views.cloneyear, name='cloneyear'),
     url(r'^.*about.*$', TemplateView.as_view(template_name='admin/about.html'), name='aboutsystem'),
     url(r'^.*docgen/', include(('thesis.urls', 'thesis'))),
-    
+    path('health/', views.health_check, name='health_check'),
 ]
 
 

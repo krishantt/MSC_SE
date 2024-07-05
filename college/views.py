@@ -16,6 +16,11 @@ def home(request):
     return render(request, 'indexx.html')
 
 
+
+def health_check(request):
+    return HttpResponse("OK")
+
+
 def generate_xlsx(request, assignsubjectteacherlist="none"):
     if assignsubjectteacherlist == "none":
         assignsubjectteacherlist = AssignSubjectTeacher.objects.all()
