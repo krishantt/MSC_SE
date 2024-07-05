@@ -16,6 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the current directory contents into the container at /app/
 COPY . /app/
+
+RUN ls -la /app
 # Expose port 7188 for the Django app
 EXPOSE 7188
 
