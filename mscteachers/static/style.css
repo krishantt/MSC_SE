@@ -1,22 +1,34 @@
 /* styles.css */
 
-/* Basic styles */
+/* Root variables for easy color and spacing management */
+:root {
+    --primary-color: #0066cc; /* Bright blue background */
+    --secondary-color: #004999; /* Slightly darker blue for buttons */
+    --hover-color: #003366; /* Even darker blue for hover state */
+    --background-color: #f0f0f0; /* Light grey background */
+    --text-color: #333; /* Main text color */
+    --white: #fff; /* White color */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Shadow color */
+}
+
+/* Global styles */
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
+/* Header styling */
 header {
-    background-color: #0066cc; /* Bright blue background */
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white);
     text-align: center;
-    padding: 40px 0; /* Added padding for more spacing */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2.5em 0 1.5em; /* Padding adjusted for better spacing */
+    box-shadow: 0 4px 8px var(--shadow-color);
     position: relative;
 }
 
@@ -28,23 +40,25 @@ header h1 {
 }
 
 .header-description {
-    margin: 10px 0 30px; /* Space below the header */
+    margin: 0.6em 0 0.875em; /* Using em for consistent spacing */
     font-size: 1.2em;
-    color: #fff;
+    color: var(--white);
     font-weight: 300;
 }
 
 /* Navigation styling within header */
 header nav {
     position: absolute;
-    top: 150px; /* Positioning the ADMIN link lower */
-    right: 150px;
+    top: 55px; /* Adjusted to move the ADMIN link higher */
+    right: 120px;
 }
 
 header nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex; /* Flexbox for better layout management */
+    gap: 1em; /* Gap between items */
 }
 
 header nav ul li {
@@ -52,44 +66,57 @@ header nav ul li {
 }
 
 header nav ul li a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 20px; /* Padding for clickable area */
-    background-color: #004999; /* Slightly darker blue */
+    padding: 0.625em 1.25em; /* Padding adjusted for consistency */
+    background-color: var(--secondary-color);
     border-radius: 5px; /* Rounded corners for buttons */
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-header nav ul li a:hover {
-    background-color: #003366; /* Even darker on hover */
+.centered-image {
+    width: 100%;              /* Make image fill the full width of main */
+    height: 100%;             /* Make image fill the full height of main */
+    object-fit: cover;        /* Ensure the image covers the area while maintaining aspect ratio */
+    border-radius: 8px;       /* Match border radius of the main container */
+}
+
+header nav ul li a:hover,
+header nav ul li a:focus { /* Adding focus for accessibility */
+    background-color: var(--hover-color);
     transform: translateY(-3px);
 }
 
 main {
-    padding: 20px;
-    flex: 1; /* Grow to fill available space */
-    background-color: #fff; /* White background for content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    border-radius: 8px; /* Rounded corners for a smooth look */
-    margin: 20px;
+    padding: 0;               /* Remove padding to allow image to cover full area */
+    flex: 1;                  /* Allow main to grow and fill available space */
+    background-color: var(--white); /* Maintain white background for main */
+    margin: 1.25em;           /* Margin to create space around the main content */
+    box-shadow: 0 4px 8px var(--shadow-color); /* Box shadow for depth */
+    border-radius: 8px;       /* Rounded corners for the main container */
+    display: flex;            /* Use flexbox to position content */
+    align-items: center;      /* Center content vertically */
+    justify-content: center;  /* Center content horizontally */
+    overflow: hidden;         /* Hide any overflow from the image */
 }
+
 
 /* Footer styling */
 footer {
-    background-color: #004999; /* Consistent with navigation hover color */
-    color: white;
+    background-color: var(--secondary-color); /* Consistent with navigation hover color */
+    color: var(--white);
     text-align: center;
-    padding: 15px 0;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.9375em 0; /* Using em for padding consistency */
+    box-shadow: 0 -4px 8px var(--shadow-color);
     width: 100%;
-    position: absolute;
-    bottom: 0; /* Stick to the bottom */
-    left: 0;
-    right: 0;
     margin-top: auto; /* Ensure footer stays at bottom if content is short */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Responsive design for smaller screens */
 @media (max-width: 600px) {
     header h1 {
         font-size: 2em;
@@ -99,12 +126,17 @@ footer {
         font-size: 1em;
     }
 
+    header nav ul {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;
+    }
+
     header nav ul li {
         display: block;
-        margin: 10px 0;
+        margin: 0.625em 0; /* Consistent spacing with padding */
     }
 
     main {
-        margin: 10px;
+        margin: 0.625em;
     }
 }
