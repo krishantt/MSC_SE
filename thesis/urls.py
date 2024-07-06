@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from .views import health_check
 urlpatterns = [
     path('', views.index, name='index'),
     path('proposal_entries/', views.proposal_entries, name='proposal_entries'),
@@ -18,5 +18,6 @@ urlpatterns = [
     # path('admin_setting', views.admin, name='admin_setting'),
     # path('budget', views.budget, name='budget'),
     path('invalid', views.invalid, name='invalid'),
+    path('health/', views.health_check, name='health_check'),
 
 ]
