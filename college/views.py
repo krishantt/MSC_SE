@@ -18,7 +18,7 @@ def home(request):
 
 
 def health_check(request):
-    return HttpResponse("OK")
+    return HttpResponse("OK", status=200)
 
 
 def generate_xlsx(request, assignsubjectteacherlist="none"):
