@@ -14,10 +14,12 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN apt-get update && apt-get install -y curl
 # Copy the current directory contents into the container at /app/
 COPY . /app/
 
 RUN ls -la /app
+
 # Expose port 7188 for the Django app
 EXPOSE 7188
 
