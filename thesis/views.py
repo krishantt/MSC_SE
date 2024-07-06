@@ -23,6 +23,11 @@ def invalid(request):
     return render(request, 'thesis/invalid.html')
 
 
+def health_check(request):
+    return HttpResponse("OK", status=200)
+
+
+
 # def budget(request):
 #     if request.method == 'POST':
 #         formset = BudgetFormset(request.POST)
