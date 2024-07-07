@@ -15,8 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the current directory contents into the container at /app/
 COPY . /app/
 
-# Expose port 7188 for the Django app
-EXPOSE 7188
+# Expose port 8000 for the Django app
+EXPOSE 8000
 
 # Define the health check with an increased start period
 # HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
