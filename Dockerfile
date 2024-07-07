@@ -23,4 +23,4 @@ EXPOSE 8000
 #     CMD curl -f http://localhost:7188/health/ || exit 1
 
 # Run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:7188"]
+CMD ["python", "manage.py", "runserver"]
