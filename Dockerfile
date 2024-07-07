@@ -19,8 +19,8 @@ COPY . /app/
 EXPOSE 7188
 
 # Define the health check with an increased start period
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:7188/health/ || exit 1
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+#     CMD curl -f http://localhost:7188/health/ || exit 1
 
 # Run the application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:7188"]
