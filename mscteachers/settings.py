@@ -24,17 +24,11 @@ SECRET_KEY = 'n=7ud-_go7@qv=-dmpdgp@84c)%b-f6vty1y5%w5ngi3_^aw_s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
-
-# ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '[::1]',
-    '0.0.0.0',
-    'mscw.bct.itclub.pp.ua',
-    '*.bct.itclub.pp.ua'  # Allow any subdomain of bct.itclub.pp.ua
+    '0.0.0.0',   
 ]
 # Application definition
 
