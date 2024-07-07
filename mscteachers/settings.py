@@ -28,8 +28,14 @@ DEBUG = True
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]','0.0.0.0']
-
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    '0.0.0.0',
+    'mscw.bct.itclub.pp.ua',
+    '*.bct.itclub.pp.ua'  # Allow any subdomain of bct.itclub.pp.ua
+]
 # Application definition
 
 INSTALLED_APPS = [
