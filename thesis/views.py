@@ -136,109 +136,164 @@ def proposalNotice(request):
     if request.method == 'POST':
         form = NoticeForm(request.POST)
         formExtra = NoticeFormExtra(request.POST)
+        
         if form.is_valid() and formExtra.is_valid():
-            admins = Coordinator.objects.all().get(user=request.user.id)
-            form.save()
-            Common = CommonFields.objects.all()
-            if len(Common) > 1:
-                Common[0].delete()
-            context = form.cleaned_data
-            contextFormExtra = formExtra.cleaned_data
-            defenseDate = str(Common[0].defenseDate)
-            studentBatch = str(Common[0].studentBatch)
-            context['programName'] = str(admins.programName)
-            context['coordinatorName'] = str(admins.coordinatorName)
-            context['batch'] = studentBatch
-            context['defensedate'] = defenseDate
-            context['submissionTime'] = contextFormExtra['submissionTime']
-            context['submissionDate'] = contextFormExtra['submissionDate']
-            src_add = os.path.join(
-                os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Templates'), 'Proposal'),
-                'ProposalNotice.docx')
-            output_path = os.path.join(
-                os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Documents'), 'Proposal'),
-                f"ProposalNotice_{uuid.uuid4()}.docx")
-            utils.render_to_word(src_add, output_path, context)
-            
-            response = HttpResponse(open(output_path, 'rb').read())
-            response['Content-Type'] = 'mimetype/submimetype'
-            response['Content-Disposition'] = 'attachment; filename=ProposalNotice.docx'
-            # messages.success(request, "The Download is starting...")
-            return response
-            # return redirect('thesis:index')
+            try:
+                # Use filter and first() to safely get the first matching coordinator or None
+                admins = Coordinator.objects.filter(user=request.user.id).first()
+                
+                if not admins:
+                    # Handle case where no coordinator is found
+                    messages.error(request, "No coordinator found for the current user.")
+                    return redirect('thesis:invalid')  # Or render a specific error page
+                
+                form.save()
+                Common = CommonFields.objects.all()
+                if len(Common) > 1:
+                    Common[0].delete()
+                
+                context = form.cleaned_data
+                contextFormExtra = formExtra.cleaned_data
+                defenseDate = str(Common[0].defenseDate)
+                studentBatch = str(Common[0].studentBatch)
+                
+                context['programName'] = str(admins.programName)
+                context['coordinatorName'] = str(admins.coordinatorName)
+                context['batch'] = studentBatch
+                context['defensedate'] = defenseDate
+                context['submissionTime'] = contextFormExtra['submissionTime']
+                context['submissionDate'] = contextFormExtra['submissionDate']
+                
+                src_add = os.path.join(
+                    os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Templates'), 'Proposal'),
+                    'ProposalNotice.docx'
+                )
+                output_path = os.path.join(
+                    os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Documents'), 'Proposal'),
+                    f"ProposalNotice_{uuid.uuid4()}.docx"
+                )
+                utils.render_to_word(src_add, output_path, context)
+                
+                response = HttpResponse(open(output_path, 'rb').read())
+                response['Content-Type'] = 'mimetype/submimetype'
+                response['Content-Disposition'] = 'attachment; filename=ProposalNotice.docx'
+                # messages.success(request, "The Download is starting...")
+                return response
+                
+            except Exception as e:
+                # Log the exception and redirect to an error page or show an error message
+                messages.error(request, f"An unexpected error occurred: {e}")
+                return redirect('thesis:invalid')
         else:
             return redirect('thesis:invalid')
-
     else:
         form = NoticeForm()
         formExtra = NoticeFormExtra()
         return render(request, 'thesis/proposalAndFinalNotice.html', {'form': form, 'formExtra': formExtra})
 
-
 def midTermNotice(request):
     if request.method == 'POST':
         form = NoticeForm(request.POST)
-        print(form.errors)
+        
         if form.is_valid():
-            admins = Coordinator.objects.all().get(user=request.user.id)
-            form.save()
-            Common = CommonFields.objects.all()
-            if len(Common) > 1:
-                Common[0].delete()
-            context = form.cleaned_data
-            context['programName'] = str(admins.programName)
-            context['coordinatorName'] = str(admins.coordinatorName)
-            src_add = os.path.join(
-                os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Templates'), 'Midterm'),
-                'MidtermNotice.docx')
-            output_path = os.path.join(
-                os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Documents'), 'Midterm'),
-                'midtermNotice.docx')
-            
-            utils.render_to_word(src_add, output_path, context)
-            response = HttpResponse(open(output_path, 'rb').read())
-            response['Content-Type'] = 'mimetype/submimetype'
-            response['Content-Disposition'] = 'attachment; filename=midtermNotice.docx'
-            # messages.success(request, "The Download is starting...")
-            return response
-            # return redirect('thesis:index')
+            try:
+                # Use filter and first() to safely get the first matching coordinator or None
+                admins = Coordinator.objects.filter(user=request.user.id).first()
+                
+                if not admins:
+                    # Handle case where no coordinator is found
+                    messages.error(request, "No coordinator found for the current user.")
+                    return redirect('thesis:invalid')  # Or render a specific error page
+
+                form.save()
+                Common = CommonFields.objects.all()
+                if len(Common) > 1:
+                    Common[0].delete()
+                
+                context = form.cleaned_data
+                context['programName'] = str(admins.programName)
+                context['coordinatorName'] = str(admins.coordinatorName)
+                
+                src_add = os.path.join(
+                    os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Templates'), 'Midterm'),
+                    'MidtermNotice.docx'
+                )
+                output_path = os.path.join(
+                    os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Documents'),
+                    'Midterm', 'midtermNotice.docx'
+                )
+                
+                utils.render_to_word(src_add, output_path, context)
+                response = HttpResponse(open(output_path, 'rb').read())
+                response['Content-Type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                response['Content-Disposition'] = 'attachment; filename=midtermNotice.docx'
+                
+                return response
+                
+            except Exception as e:
+                # Log the exception and handle the error
+                messages.error(request, f"An unexpected error occurred: {e}")
+                return redirect('thesis:invalid')
+        else:
+            # Handle form errors
+            messages.error(request, "Form validation failed. Please correct the errors and try again.")
+            return render(request, 'thesis/midTermNotice.html', {'form': form})
 
     else:
         form = NoticeForm()
-        context = {'form': form}
-        return render(request, 'thesis/midTermNotice.html', context)
-
+        return render(request, 'thesis/midTermNotice.html', {'form': form})
 
 def finalNotice(request):
     if request.method == 'POST':
         form = NoticeForm(request.POST)
         formExtra = NoticeFormExtra(request.POST)
+        
         if form.is_valid() and formExtra.is_valid():
-            admins = Coordinator.objects.all().get(user=request.user.id)
-            form.save()
-            Common = CommonFields.objects.all()
-            if len(Common) > 1:
-                Common[0].delete()
-            context = form.cleaned_data
-            contextFormExtra = formExtra.cleaned_data
-            context['submissionTime'] = contextFormExtra['submissionTime']
-            context['submissionDate'] = contextFormExtra['submissionDate']
-            context['programName'] = str(admins.programName)
-            context['coordinatorName'] = str(admins.coordinatorName)
-            print (context)
-            src_add = os.path.join(
-                os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Templates'), 'Final'),
-                'FinalNotice.docx')
-            output_path  = os.path.join(
-                os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Documents'), 'Final'),
-                'finalNotice.docx')
-            utils.render_to_word(src_add, output_path, context)
-            response = HttpResponse(open(output_path, 'rb').read())
-            response['Content-Type'] = 'mimetype/submimetype'
-            response['Content-Disposition'] = 'attachment; filename=finalNotice.docx'
-            # messages.success(request, "The Download is starting...")
-            return response
-            # return redirect('thesis:index')
+            try:
+                # Use filter and first() to safely get the first matching coordinator or None
+                admins = Coordinator.objects.filter(user=request.user.id).first()
+                
+                if not admins:
+                    # Handle case where no coordinator is found
+                    messages.error(request, "No coordinator found for the current user.")
+                    return redirect('thesis:invalid')  # Or render a specific error page
+
+                form.save()
+                Common = CommonFields.objects.all()
+                if len(Common) > 1:
+                    Common[0].delete()
+                
+                context = form.cleaned_data
+                contextFormExtra = formExtra.cleaned_data
+                context['submissionTime'] = contextFormExtra['submissionTime']
+                context['submissionDate'] = contextFormExtra['submissionDate']
+                context['programName'] = str(admins.programName)
+                context['coordinatorName'] = str(admins.coordinatorName)
+                
+                src_add = os.path.join(
+                    os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Templates'), 'Final'),
+                    'FinalNotice.docx'
+                )
+                output_path = os.path.join(
+                    os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Documents'),
+                    'Final', 'finalNotice.docx'
+                )
+                
+                utils.render_to_word(src_add, output_path, context)
+                response = HttpResponse(open(output_path, 'rb').read())
+                response['Content-Type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                response['Content-Disposition'] = 'attachment; filename=finalNotice.docx'
+                
+                return response
+                
+            except Exception as e:
+                # Log the exception and handle the error
+                messages.error(request, f"An unexpected error occurred: {e}")
+                return redirect('thesis:invalid')
+        else:
+            # Handle form errors
+            messages.error(request, "Form validation failed. Please correct the errors and try again.")
+            return render(request, 'thesis/proposalAndFinalNotice.html', {'form': form, 'formExtra': formExtra})
 
     else:
         form = NoticeForm()

@@ -8,4 +8,4 @@ services:
     volumes:
       - .:/app
     ports:
-      - "7188:8000"
+      - "7188:7188"
