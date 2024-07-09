@@ -3,9 +3,9 @@ version: '3'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:7188
+    command: python manage.py runserver 0.0.0.0:8000
     image: msc-workflow-ms-web-1:latest
     volumes:
       - .:/app
     ports:
-      - "7188:7188"
+      - "7188:8000"
