@@ -20,4 +20,4 @@ EXPOSE 7188
 
 # Run the application
 # CMD ["python", "/app/manage.py", "runserver",'0.0.0.0:7188']
-CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:7188"]
+CMD ["sh", "-c", "python manage.py migrate && python /app/manage.py runserver 0.0.0.0:7188"]
