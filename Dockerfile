@@ -19,4 +19,5 @@ COPY . /app/
 EXPOSE 7188
 
 # Run the application
-CMD ["python", "manage.py", "runserver",'0.0.0.0:7188']
+#CMD ["python", "manage.py", "runserver",'0.0.0.0:7188']
+CMD ["gunicorn", "--workers", "3", "--bind", "0.0.0.0:7188", "mscteachers.wsgi:application"]
