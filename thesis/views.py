@@ -11,8 +11,10 @@ from .forms import NoticeForm, MidTermThesisCommittee, StudentFormset, \
 from django.http import HttpResponse
 import uuid
 from django.contrib import messages
+from django.http import JsonResponse
 
-# Create your views here.
+def health_check(request):
+    return JsonResponse({"status": "ok"})
 
 
 def index(request):
@@ -21,11 +23,6 @@ def index(request):
 
 def invalid(request):
     return render(request, 'thesis/invalid.html')
-
-
-def health_check(request):
-    return HttpResponse("OK", status=200)
-
 
 
 # def budget(request):
