@@ -25,7 +25,7 @@ RUN ls -l /app/
 EXPOSE 7188
 
 # Run the application
-CMD ["/app/start-server.sh"]
+CMD ["sh","/app/start-server.sh"]
 
 
 
