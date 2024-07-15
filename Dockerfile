@@ -15,6 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire current directory to /app/
 COPY . /app/
 
+COPY start-server.sh /app/
+
 # Ensure the start-server script is executable
 RUN chmod +x /app/start-server.sh
 
