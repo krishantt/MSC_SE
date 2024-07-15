@@ -21,10 +21,11 @@ COPY start-server.sh /app/
 # Make the start-server script executable
 RUN chmod +x /app/start-server.sh
 
-# Expose port 8000 for the Django app
+# Expose port 7188 for the application
 EXPOSE 7188
 
 # Run the application
-# CMD ["python", "/app/manage.py", "runserver",'0.0.0.0:7188']
-CMD ["sh", "/app/start-server.sh"]
+CMD ["/app/start-server.sh"]
+
+
 
