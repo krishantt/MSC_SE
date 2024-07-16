@@ -29,6 +29,6 @@ RUN ls -l /app/
 EXPOSE 7188
 
 # Run the application
-ENTRYPOINT ["sh", "-c", "ls -l /app && /app/start-server.sh"]
+ENTRYPOINT ["sh", "-c", "ls -l /app && /start-server.sh"]
 
 
