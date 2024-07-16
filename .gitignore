@@ -6,3 +6,8 @@ temp_python_spreadsheet.xlsx
 /college/migrations/
 .vscode/
 env
+Dockerfile
+docker-compose.yaml
+_graph.png 
+erdiagram.png
+start-server.sh 
