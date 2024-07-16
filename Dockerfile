@@ -1,10 +1,12 @@
 # Use Python 3.6.5 as a parent image
-FROM python:3.6.5-slim
+FROM python:3.9-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+RUN pip install --no-cache-dir numpy
+RUN pip install --no-cache-dir pandas
 # Set the working directory in the container
 WORKDIR /app
 
@@ -28,8 +30,5 @@ EXPOSE 7188
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "ls -l /app && /app/start-server.sh"]
-
-
-
 
 
