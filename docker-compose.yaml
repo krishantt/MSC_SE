@@ -7,7 +7,3 @@ services:
       dockerfile: Dockerfile # Name of the Dockerfile (optional if named Dockerfile)
     ports:
       - "8080:80" # Map port 80 in the container to port 8080 on the host
-    environment:
-      - ENV_VAR_NAME=value # Example environment variable
-    volumes:
-      - ./data:/data # Bind mount a host directory to a container directory
