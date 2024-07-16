@@ -6,7 +6,7 @@ echo "Starting server..."
 set -x
 
 # Start the Django server or whatever command you need
-python /app/manage.py runserver 0.0.0.0:7188
+python ./manage.py runserver 0.0.0.0:80
 
 # Check if the server started successfully
 if [ $? -ne 0 ]; then

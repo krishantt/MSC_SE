@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import os
 import sys
 
@@ -12,7 +11,7 @@ if __name__ == "__main__":
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    
+
     if len(sys.argv) == 1:
         sys.argv.append('runserver')
         sys.argv.append('127.0.0.1:7188')
@@ -20,4 +19,3 @@ if __name__ == "__main__":
         sys.argv.append('127.0.0.1:7188')
 
     execute_from_command_line(sys.argv)
-    

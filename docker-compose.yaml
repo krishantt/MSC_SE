@@ -1,21 +1,13 @@
-# version: '3'
-
-# services:
-#   web:
-#     build: .
-#     command: python /app/manage.py runserver 0.0.0.0:7188
-#     image: msc-workflow-ms-web-1:latest
-#     volumes:
-#       - .:/app
-#     ports:
-#       - "7188:7188"
-version: '3'
+version: "3.8" # Specify the version of Docker Compose
 
 services:
-  web:
-    build: .
-    image: msc-workflow-ms-web-1:latest
+  app:
+    build:
+      context: . # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile # Name of the Dockerfile (optional if named Dockerfile)
     ports:
-      - "7188:7188"
+      - "8080:80" # Map port 80 in the container to port 8080 on the host
+    environment:
+      - ENV_VAR_NAME=value # Example environment variable
     volumes:
-      - .:/app
+      - ./data:/data # Bind mount a host directory to a container directory
