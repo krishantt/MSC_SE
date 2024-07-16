@@ -11,3 +11,5 @@ docker-compose.yaml
 _graph.png 
 erdiagram.png
 start-server.sh 
+.dockerignore
+.gitattributes
